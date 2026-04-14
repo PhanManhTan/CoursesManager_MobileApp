@@ -1,24 +1,29 @@
 package com.example.myapplication.activities;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Looper;
+
 import androidx.appcompat.app.AppCompatActivity;
+
 import com.example.myapplication.R;
-import com.example.myapplication.activities.instructor.InstructorDashboardActivity;
+import com.example.myapplication.activities.auth.LoginActivity;
+import com.example.myapplication.activities.auth.OnboardingActivity;
 
 public class SplashActivity extends AppCompatActivity {
+
+    private static final int SPLASH_DELAY_MS = 2000;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.splash_activity);
+        setContentView(R.layout.activity_splash);
 
-        // Simple delay to show the splash and then jump to the dashboard
-        new Handler().postDelayed(() -> {
-            Intent intent = new Intent(SplashActivity.this, InstructorDashboardActivity.class);
-            startActivity(intent);
+        new Handler(Looper.getMainLooper()).postDelayed(() -> {
+            startActivity(new Intent(this, OnboardingActivity.class));
             finish();
-        }, 2000);
+        }, SPLASH_DELAY_MS);
     }
 }

@@ -10,7 +10,7 @@
         android:id="@+id/ivLogo"
         android:layout_width="80dp"
         android:layout_height="80dp"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="60dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -21,8 +21,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
-        android:text="Create Account"
-        android:textColor="#111827"
+        android:text="Welcome Back"
+        android:textColor="#FFFFFF"
         android:textSize="26sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
@@ -34,7 +34,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:text="Fill in your details to get started"
+        android:text="Sign in to your account"
         android:textColor="#6B7280"
         android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -42,12 +42,13 @@
         app:layout_constraintTop_toBottomOf="@+id/tvTitle" />
 
     <EditText
-        android:id="@+id/etFullName"
+        android:id="@+id/editTextTextEmailAddress"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:hint="Full Name"
-        android:inputType="textPersonName"
+        android:layout_marginTop="36dp"
+        android:ems="10"
+        android:hint="Email"
+        android:inputType="textEmailAddress"
         android:imeOptions="actionNext"
         android:padding="12dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -55,93 +56,67 @@
         app:layout_constraintTop_toBottomOf="@+id/tvSubtitle" />
 
     <EditText
-        android:id="@+id/etEmail"
+        android:id="@+id/editTextTextPassword"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="14dp"
-        android:hint="Email"
-        android:inputType="textEmailAddress"
-        android:imeOptions="actionNext"
-        android:padding="12dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etFullName" />
-
-    <EditText
-        android:id="@+id/etPhone"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="14dp"
-        android:hint="Phone Number"
-        android:inputType="phone"
-        android:imeOptions="actionNext"
-        android:padding="12dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etEmail" />
-
-    <EditText
-        android:id="@+id/etPassword"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="14dp"
+        android:layout_marginTop="16dp"
+        android:ems="10"
         android:hint="Password"
-        android:inputType="textPassword"
-        android:imeOptions="actionNext"
-        android:padding="12dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etPhone" />
-
-    <EditText
-        android:id="@+id/etConfirmPassword"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="14dp"
-        android:hint="Confirm Password"
         android:inputType="textPassword"
         android:imeOptions="actionDone"
         android:padding="12dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etPassword" />
+        app:layout_constraintTop_toBottomOf="@+id/editTextTextEmailAddress" />
+
+    <TextView
+        android:id="@+id/tvForgotPassword"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="Forgot Password?"
+        android:textColor="#4F46E5"
+        android:textSize="13sp"
+        android:padding="4dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTextTextPassword" />
 
     <Button
-        android:id="@+id/btnRegister"
+        android:id="@+id/btnLogin"
         android:layout_width="0dp"
         android:layout_height="52dp"
         android:layout_marginTop="24dp"
         android:backgroundTint="#4F46E5"
-        android:text="Create Account"
+        android:text="Login"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etConfirmPassword" />
+        app:layout_constraintTop_toBottomOf="@+id/tvForgotPassword" />
 
     <TextView
         android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        android:text="Already have an account? "
+        android:text="Don't have an account? "
         android:textColor="#6B7280"
         android:textSize="14sp"
-        app:layout_constraintEnd_toStartOf="@+id/tvLogin"
+        app:layout_constraintEnd_toStartOf="@+id/tvRegister"
         app:layout_constraintHorizontal_chainStyle="packed"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnRegister" />
+        app:layout_constraintTop_toBottomOf="@+id/btnLogin" />
 
     <TextView
-        android:id="@+id/tvLogin"
+        android:id="@+id/tvRegister"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        android:text="Login"
+        android:text="Register"
         android:textColor="#4F46E5"
         android:textSize="14sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/textView2"
-        app:layout_constraintTop_toBottomOf="@+id/btnRegister" />
+        app:layout_constraintTop_toBottomOf="@+id/btnLogin" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
