@@ -5,7 +5,7 @@
     android:orientation="vertical"
     android:padding="16dp"
     android:layout_marginBottom="8dp"
-    android:background="#F9FAFB">
+    android:background="#2C2C2E">
 
     <TextView
         android:id="@+id/tvNotifTitle"
@@ -13,7 +13,7 @@
         android:layout_height="wrap_content"
         android:textSize="16sp"
         android:textStyle="bold"
-        android:textColor="#111827"/>
+        android:textColor="#FFFFFF"/>
 
     <TextView
         android:id="@+id/tvNotifMessage"
@@ -21,5 +21,5 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
         android:textSize="14sp"
-        android:textColor="#4B5563"/>
+        android:textColor="#A7A7A7"/>
 </LinearLayout>

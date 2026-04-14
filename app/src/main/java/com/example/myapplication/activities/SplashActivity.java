@@ -14,7 +14,7 @@ import com.example.myapplication.activities.auth.OnboardingActivity;
 
 public class SplashActivity extends AppCompatActivity {
 
-    private static final int SPLASH_DELAY_MS = 4000;
+    private static final int SPLASH_DELAY_MS = 2000;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,11 +22,7 @@ public class SplashActivity extends AppCompatActivity {
         setContentView(R.layout.activity_splash);
 
         new Handler(Looper.getMainLooper()).postDelayed(() -> {
-            SharedPreferences prefs = getSharedPreferences("app_prefs", MODE_PRIVATE);
-            boolean onboardingDone = prefs.getBoolean("onboarding_done", false);
-
-            Class<?> destination = onboardingDone ? LoginActivity.class : OnboardingActivity.class;
-            startActivity(new Intent(this, destination));
+            startActivity(new Intent(this, OnboardingActivity.class));
             finish();
         }, SPLASH_DELAY_MS);
     }

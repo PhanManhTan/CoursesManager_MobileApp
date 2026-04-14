@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="32dp"
-    android:background="#FFFFFF"
+    android:background="#1C1D1F"
     android:gravity="center_horizontal">
 
     <TextView
@@ -13,7 +13,7 @@
         android:text="Edit Profile"
         android:textSize="24sp"
         android:textStyle="bold"
-        android:textColor="#000000"
+        android:textColor="#FFFFFF"
         android:gravity="center"
         android:layout_marginBottom="8dp"/>
 
@@ -22,6 +22,7 @@
         android:layout_height="wrap_content"
         android:text="Update your details"
         android:textSize="14sp"
+        android:textColor="#A7A7A7"
         android:gravity="center"
         android:layout_marginBottom="32dp"/>
 
@@ -30,6 +31,8 @@
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:hint="Full Name"
+        android:textColorHint="#6B7280"
+        android:textColor="#FFFFFF"
         android:inputType="textPersonName"
         android:layout_marginBottom="16dp"/>
 
@@ -38,8 +41,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Bio"
+        android:textColorHint="#6B7280"
+        android:textColor="#FFFFFF"
         android:inputType="textMultiLine"
         android:layout_marginBottom="32dp"/>
+
     <Button
         android:id="@+id/btnSave"
         android:layout_width="match_parent"
