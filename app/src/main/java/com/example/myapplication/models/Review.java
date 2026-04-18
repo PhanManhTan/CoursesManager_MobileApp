@@ -2,34 +2,34 @@ package com.example.myapplication.models;
 
 import com.google.gson.annotations.SerializedName;
 
-public class Report {
+public class Review {
     @SerializedName("id")
     private String id;
-
-    @SerializedName("user_id")
-    private String userId;
 
     @SerializedName("course_id")
     private String courseId;
 
-    @SerializedName("reason")
-    private String reason;
+    @SerializedName("user_id")
+    private String userId;
 
-    @SerializedName("status")
-    private String status;
+    @SerializedName("rating")
+    private int rating;
+
+    @SerializedName("comment")
+    private String comment;
 
     @SerializedName("created_at")
     private String createdAt;
 
-    public Report() {
+    public Review() {
     }
 
-    public Report(String id, String userId, String courseId, String reason, String status, String createdAt) {
+    public Review(String id, String courseId, String userId, int rating, String comment, String createdAt) {
         this.id = id;
-        this.userId = userId;
         this.courseId = courseId;
-        this.reason = reason;
-        this.status = status;
+        this.userId = userId;
+        this.rating = rating;
+        this.comment = comment;
         this.createdAt = createdAt;
     }
 
@@ -41,14 +41,6 @@ public class Report {
         this.id = id;
     }
 
-    public String getUserId() {
-        return userId;
-    }
-
-    public void setUserId(String userId) {
-        this.userId = userId;
-    }
-
     public String getCourseId() {
         return courseId;
     }
@@ -57,20 +49,28 @@ public class Report {
         this.courseId = courseId;
     }
 
-    public String getReason() {
-        return reason;
+    public String getUserId() {
+        return userId;
     }
 
-    public void setReason(String reason) {
-        this.reason = reason;
+    public void setUserId(String userId) {
+        this.userId = userId;
     }
 
-    public String getStatus() {
-        return status;
+    public int getRating() {
+        return rating;
     }
 
-    public void setStatus(String status) {
-        this.status = status;
+    public void setRating(int rating) {
+        this.rating = rating;
+    }
+
+    public String getComment() {
+        return comment;
+    }
+
+    public void setComment(String comment) {
+        this.comment = comment;
     }
 
     public String getCreatedAt() {

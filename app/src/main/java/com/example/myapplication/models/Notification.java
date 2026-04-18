@@ -2,34 +2,34 @@ package com.example.myapplication.models;
 
 import com.google.gson.annotations.SerializedName;
 
-public class Report {
+public class Notification {
     @SerializedName("id")
     private String id;
 
     @SerializedName("user_id")
     private String userId;
 
-    @SerializedName("course_id")
-    private String courseId;
+    @SerializedName("title")
+    private String title;
 
-    @SerializedName("reason")
-    private String reason;
+    @SerializedName("message")
+    private String message;
 
-    @SerializedName("status")
-    private String status;
+    @SerializedName("is_read")
+    private boolean isRead;
 
     @SerializedName("created_at")
     private String createdAt;
 
-    public Report() {
+    public Notification() {
     }
 
-    public Report(String id, String userId, String courseId, String reason, String status, String createdAt) {
+    public Notification(String id, String userId, String title, String message, boolean isRead, String createdAt) {
         this.id = id;
         this.userId = userId;
-        this.courseId = courseId;
-        this.reason = reason;
-        this.status = status;
+        this.title = title;
+        this.message = message;
+        this.isRead = isRead;
         this.createdAt = createdAt;
     }
 
@@ -49,28 +49,28 @@ public class Report {
         this.userId = userId;
     }
 
-    public String getCourseId() {
-        return courseId;
+    public String getTitle() {
+        return title;
     }
 
-    public void setCourseId(String courseId) {
-        this.courseId = courseId;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
-    public String getReason() {
-        return reason;
+    public String getMessage() {
+        return message;
     }
 
-    public void setReason(String reason) {
-        this.reason = reason;
+    public void setMessage(String message) {
+        this.message = message;
     }
 
-    public String getStatus() {
-        return status;
+    public boolean isRead() {
+        return isRead;
     }
 
-    public void setStatus(String status) {
-        this.status = status;
+    public void setRead(boolean read) {
+        isRead = read;
     }
 
     public String getCreatedAt() {

@@ -13,10 +13,10 @@ public class StudentListViewModel extends ViewModel {
 
     public StudentListViewModel() {
         // Mock data
-        allStudents.add(new User("s1", "Nguyen Van A", "a@example.com", "Student"));
-        allStudents.add(new User("s2", "Tran Thi B", "b@example.com", "Student"));
-        allStudents.add(new User("s3", "Le Van C", "c@example.com", "Student"));
-        allStudents.add(new User("s4", "Phan Thi D", "d@example.com", "Student"));
+        allStudents.add(new User("s1", "Nguyen Van A", "a@example.com", null, null, "student", null, null));
+        allStudents.add(new User("s2", "Tran Thi B", "b@example.com", null, null, "student", null, null));
+        allStudents.add(new User("s3", "Le Van C", "c@example.com", null, null, "student", null, null));
+        allStudents.add(new User("s4", "Phan Thi D", "d@example.com", null, null, "student", null, null));
         students.setValue(new ArrayList<>(allStudents));
     }
 
@@ -32,7 +32,7 @@ public class StudentListViewModel extends ViewModel {
             List<User> filtered = new ArrayList<>();
             String lowerQuery = query.toLowerCase();
             for (User user : allStudents) {
-                if (user.getName().toLowerCase().contains(lowerQuery) || 
+                if (user.getFullName().toLowerCase().contains(lowerQuery) ||
                     user.getEmail().toLowerCase().contains(lowerQuery)) {
                     filtered.add(user);
                 }

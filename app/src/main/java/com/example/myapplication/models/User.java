@@ -1,43 +1,107 @@
 package com.example.myapplication.models;
 
-import java.io.Serializable;
+import com.google.gson.annotations.SerializedName;
 
-public class User implements Serializable {
+public class User {
+    @SerializedName("id")
     private String id;
-    private String name;
+
+    @SerializedName("full_name")
+    private String fullName;
+
+    @SerializedName("email")
     private String email;
-    private String role; // Student, Instructor, Admin
+
+    @SerializedName("password_hash")
+    private String passwordHash;
+
+    @SerializedName("avatar_url")
     private String avatarUrl;
-    private boolean isBanned;
+
+    @SerializedName("role")
+    private String role;
+
+    @SerializedName("bio")
+    private String bio;
+
+    @SerializedName("created_at")
+    private String createdAt;
 
     public User() {
-        // Default constructor required for calls to DataSnapshot.getValue(User.class)
     }
 
-    public User(String id, String name, String email, String role) {
+    public User(String id, String fullName, String email, String passwordHash, String avatarUrl, String role, String bio, String createdAt) {
         this.id = id;
-        this.name = name;
+        this.fullName = fullName;
         this.email = email;
+        this.passwordHash = passwordHash;
+        this.avatarUrl = avatarUrl;
         this.role = role;
-        this.isBanned = false;
+        this.bio = bio;
+        this.createdAt = createdAt;
     }
 
-    // Getters and Setters
-    public String getId() { return id; }
-    public void setId(String id) { this.id = id; }
+    public String getId() {
+        return id;
+    }
 
-    public String getName() { return name; }
-    public void setName(String name) { this.name = name; }
+    public void setId(String id) {
+        this.id = id;
+    }
 
-    public String getEmail() { return email; }
-    public void setEmail(String email) { this.email = email; }
+    public String getFullName() {
+        return fullName;
+    }
 
-    public String getRole() { return role; }
-    public void setRole(String role) { this.role = role; }
+    public void setFullName(String fullName) {
+        this.fullName = fullName;
+    }
 
-    public String getAvatarUrl() { return avatarUrl; }
-    public void setAvatarUrl(String avatarUrl) { this.avatarUrl = avatarUrl; }
+    public String getEmail() {
+        return email;
+    }
 
-    public boolean isBanned() { return isBanned; }
-    public void setBanned(boolean banned) { isBanned = banned; }
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getPasswordHash() {
+        return passwordHash;
+    }
+
+    public void setPasswordHash(String passwordHash) {
+        this.passwordHash = passwordHash;
+    }
+
+    public String getAvatarUrl() {
+        return avatarUrl;
+    }
+
+    public void setAvatarUrl(String avatarUrl) {
+        this.avatarUrl = avatarUrl;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
+    }
+
+    public String getBio() {
+        return bio;
+    }
+
+    public void setBio(String bio) {
+        this.bio = bio;
+    }
+
+    public String getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(String createdAt) {
+        this.createdAt = createdAt;
+    }
 }
