@@ -2,6 +2,7 @@
 build/
 .idea/
 local.properties
+.claude/
 *.iml
 captures/
 .externalNativeBuild/
@@ -11,3 +12,5 @@ captures/
 *.jks
 Planning.xlsx
 .DS_Store
+*.jks
+*.keystore
