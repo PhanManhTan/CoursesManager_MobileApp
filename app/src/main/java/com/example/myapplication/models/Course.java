@@ -9,12 +9,25 @@ public class Course implements Serializable {
     private String description;
     private double price;
     private String thumbnailUrl;
-    private String status; // Pending, Approved, Rejected
+    private String status; // Pending, Approved, Rejected, DRAFT, PUBLISHED
     private float rating;
     private int studentCount;
+    private int lessonCount;
+    private String duration;
+    private int thumbnailResId; // For mockup/resource images
 
     public Course() {
         // Default constructor for Firebase
+    }
+
+    public Course(String id, String title, int lessonCount, String duration, double price, String status, int thumbnailResId) {
+        this.id = id;
+        this.title = title;
+        this.lessonCount = lessonCount;
+        this.duration = duration;
+        this.price = price;
+        this.status = status;
+        this.thumbnailResId = thumbnailResId;
     }
 
     public Course(String id, String title, String instructorId, String description, double price) {
@@ -55,4 +68,13 @@ public class Course implements Serializable {
 
     public int getStudentCount() { return studentCount; }
     public void setStudentCount(int studentCount) { this.studentCount = studentCount; }
+
+    public int getLessonCount() { return lessonCount; }
+    public void setLessonCount(int lessonCount) { this.lessonCount = lessonCount; }
+
+    public String getDuration() { return duration; }
+    public void setDuration(String duration) { this.duration = duration; }
+
+    public int getThumbnailResId() { return thumbnailResId; }
+    public void setThumbnailResId(int thumbnailResId) { this.thumbnailResId = thumbnailResId; }
 }
