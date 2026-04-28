@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -45,7 +47,8 @@
 
         <!-- ── Instructor Activities ── -->
         <activity android:name=".activities.instructor.InstructorDashboardActivity" android:exported="true" />
-        <activity android:name=".activities.instructor.EditCourseActivity"           android:exported="true" />
+        <activity android:name=".activities.instructor.CourseListActivity"           android:exported="true" />
+        <activity android:name=".activities.instructor.EditCoursesActivity"           android:exported="true" />
         <activity android:name=".activities.instructor.StudentListActivity"          android:exported="true" />
         <activity android:name=".activities.instructor.RevenueActivity"              android:exported="true" />
         <activity android:name=".activities.instructor.ProfileInstructorActivity"    android:exported="true" />

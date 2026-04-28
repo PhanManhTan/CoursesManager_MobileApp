@@ -9,7 +9,6 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.example.myapplication.R;
 import com.example.myapplication.activities.admin.AdminDashboardActivity;
-import com.example.myapplication.activities.common.RevenueActivity;
 import com.example.myapplication.viewmodels.InstructorViewModel;
 
 public class InstructorDashboardActivity extends AppCompatActivity {
@@ -41,7 +40,6 @@ public class InstructorDashboardActivity extends AppCompatActivity {
         viewModel.getTotalStudents().observe(this, students -> tvTotalStudents.setText(students));
         viewModel.getMonthlyRevenue().observe(this, revenue -> tvMonthlyRevenue.setText(revenue));
         viewModel.getAvgRating().observe(this, rating -> tvAvgRating.setText(rating));
-        // Note: tvLiveCourses logic could be added to ViewModel if needed
     }
 
     private void setupListeners() {
