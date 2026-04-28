@@ -3,9 +3,13 @@ package com.example.myapplication.activities.instructor;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.TextView;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
+
 import com.example.myapplication.R;
+import com.example.myapplication.activities.admin.AdminDashboardActivity;
+import com.example.myapplication.activities.common.RevenueActivity;
 import com.example.myapplication.viewmodels.InstructorViewModel;
 
 public class InstructorDashboardActivity extends AppCompatActivity {
@@ -46,7 +50,7 @@ public class InstructorDashboardActivity extends AppCompatActivity {
             startActivity(new Intent(this, CourseListActivity.class));
         });
 
-        // Tạo khóa học mới (Mở màn hình EditCoursesActivity với cờ NEW_COURSE)
+        // Tạo khóa học mới
         findViewById(R.id.btnCreateCourse).setOnClickListener(v -> {
             Intent intent = new Intent(this, EditCoursesActivity.class);
             intent.putExtra("IS_NEW_COURSE", true);
@@ -63,7 +67,7 @@ public class InstructorDashboardActivity extends AppCompatActivity {
 
         // Truy cập Admin Dashboard (Nhấn giữ tiêu đề)
         findViewById(R.id.header).setOnLongClickListener(v -> {
-            startActivity(new Intent(this, com.example.myapplication.activities.admin.AdminDashboardActivity.class));
+            startActivity(new Intent(this, AdminDashboardActivity.class));
             return true;
         });
     }

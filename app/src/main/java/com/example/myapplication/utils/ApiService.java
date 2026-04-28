@@ -15,22 +15,27 @@ import retrofit2.http.PUT;
 import retrofit2.http.Query;
 
 public interface ApiService {
+    @POST("auth/v1/token")
+    Call<AuthResponse> login(
+            @Query("grant_type") String grantType,
+            @Body LoginRequest request
+    );
 
     @POST("auth/v1/signup")
-    Call<AuthResponse> register(@Body RegisterRequest body);
-
-    @POST("auth/v1/token")
-    Call<AuthResponse> login(@Query("grant_type") String grantType, @Body LoginRequest body);
+    Call<AuthResponse> register(@Body RegisterRequest request);
 
     @POST("auth/v1/verify")
-    Call<AuthResponse> verifyOtp(@Body OtpRequest body);
-
-    @POST("auth/v1/resend")
-    Call<Void> resendOtp(@Body ResendOtpRequest body);
+    Call<AuthResponse> verifyOtp(@Body OtpRequest request);
 
     @POST("auth/v1/recover")
-    Call<Void> forgotPassword(@Body LoginRequest body);
+    Call<Void> forgotPassword(@Body LoginRequest request);
+
+    @POST("auth/v1/otp")
+    Call<Void> resendOtp(@Body ResendOtpRequest request);
 
     @PUT("auth/v1/user")
-    Call<Void> updatePassword(@Header("Authorization") String bearer, @Body UpdatePasswordRequest body);
+    Call<Void> updatePassword(
+            @Header("Authorization") String authHeader,
+            @Body UpdatePasswordRequest request
+    );
 }
