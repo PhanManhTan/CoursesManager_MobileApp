@@ -11,7 +11,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 public class InstructorDashboardActivity extends AppCompatActivity {
 
     private InstructorViewModel viewModel;
-    private TextView tvTotalStudents, tvMonthlyRevenue, tvAvgRating;
+    private TextView tvTotalStudents, tvMonthlyRevenue, tvAvgRating, tvLiveCourses;
     private BottomNavigationView bottomNav;
 
     @Override
@@ -23,6 +23,7 @@ public class InstructorDashboardActivity extends AppCompatActivity {
         tvTotalStudents = findViewById(R.id.tvTotalStudents);
         tvMonthlyRevenue = findViewById(R.id.tvMonthlyRevenue);
         tvAvgRating = findViewById(R.id.tvAvgRating);
+        tvLiveCourses = findViewById(R.id.tvLiveCourses);
         bottomNav = findViewById(R.id.bottomNav);
 
         setupBottomNav();
@@ -34,6 +35,7 @@ public class InstructorDashboardActivity extends AppCompatActivity {
         viewModel.getTotalStudents().observe(this, students -> tvTotalStudents.setText(students));
         viewModel.getMonthlyRevenue().observe(this, revenue -> tvMonthlyRevenue.setText(revenue));
         viewModel.getAvgRating().observe(this, rating -> tvAvgRating.setText(rating));
+        viewModel.getLiveCourses().observe(this, count -> tvLiveCourses.setText(count));
 
         // Click listeners for actions
         findViewById(R.id.btnCreateCourse).setOnClickListener(v -> {
@@ -53,6 +55,14 @@ public class InstructorDashboardActivity extends AppCompatActivity {
             startActivity(new android.content.Intent(this, com.example.myapplication.activities.admin.AdminDashboardActivity.class));
             return true;
         });
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (viewModel != null) {
+            viewModel.refreshStats();
+        }
     }
 
     private void setupBottomNav() {
