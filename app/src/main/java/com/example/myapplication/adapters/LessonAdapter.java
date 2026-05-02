@@ -33,7 +33,7 @@ public class LessonAdapter extends RecyclerView.Adapter<LessonAdapter.LessonView
     @Override
     public void onBindViewHolder(@NonNull LessonViewHolder holder, int position) {
         Lesson lesson = lessonList.get(position);
-        holder.tvLessonNumber.setText("Bài " + (position + 1) + ": " + lesson.getTitle());
+        holder.tvLessonNumber.setText("Lesson " + (position + 1) + ": " + lesson.getTitle());
 
         // LOGIC CHÍNH: Mỗi lần ấn nút này, nó sẽ nạp item_intructor_quizz_question vào container
         holder.btnAddQuiz.setOnClickListener(v -> {

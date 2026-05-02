@@ -17,7 +17,7 @@
             android:id="@+id/tvQuizIndex"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Câu hỏi:"
+            android:text="Question:"
             android:textColor="@color/accent_light"
             android:textSize="13sp"
             android:textStyle="bold" />
@@ -37,7 +37,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/bg_file_placeholder"
-        android:hint="Nội dung câu hỏi..."
+        android:hint="Question content..."
         android:padding="10dp"
         android:textColor="@color/white"
         android:textColorHint="@color/text_hint"
@@ -64,7 +64,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="34dp"
                 android:background="@drawable/bg_file_placeholder"
-                android:hint="Đáp án A"
+                android:hint="Option A"
                 android:paddingHorizontal="10dp"
                 android:textColor="@color/white"
                 android:textSize="12sp" />
@@ -85,7 +85,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="34dp"
                 android:background="@drawable/bg_file_placeholder"
-                android:hint="Đáp án B"
+                android:hint="Option B"
                 android:paddingHorizontal="10dp"
                 android:textColor="@color/white"
                 android:textSize="12sp" />
@@ -106,7 +106,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="34dp"
                 android:background="@drawable/bg_file_placeholder"
-                android:hint="Đáp án C"
+                android:hint="Option C"
                 android:paddingHorizontal="10dp"
                 android:textColor="@color/white"
                 android:textSize="12sp" />
@@ -126,7 +126,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="34dp"
                 android:background="@drawable/bg_file_placeholder"
-                android:hint="Đáp án D"
+                android:hint="Option D"
                 android:paddingHorizontal="10dp"
                 android:textColor="@color/white"
                 android:textSize="12sp" />

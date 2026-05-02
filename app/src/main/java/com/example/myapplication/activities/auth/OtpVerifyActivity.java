@@ -3,6 +3,8 @@ import com.example.myapplication.data.remote.AuthApi;
 import com.example.myapplication.data.remote.RetrofitClient;
 import com.example.myapplication.utils.SessionManager;
 
+import org.json.JSONObject;
+
 import retrofit2.Call;
 
 import android.content.Intent;
@@ -205,7 +207,9 @@ public class OtpVerifyActivity extends AppCompatActivity {
                     }
 
                 } else {
-                    Toast.makeText(OtpVerifyActivity.this, "OTP invalid or expired", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(OtpVerifyActivity.this,
+                            parseOtpError(response), Toast.LENGTH_LONG).show();
+                    clearOtpFields();
                 }
             }
 
@@ -216,6 +220,25 @@ public class OtpVerifyActivity extends AppCompatActivity {
                 Toast.makeText(OtpVerifyActivity.this, "Error: " + t.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
+    }
+
+    private String parseOtpError(retrofit2.Response<?> response) {
+        try {
+            if (response.errorBody() != null) {
+                JSONObject json = new JSONObject(response.errorBody().string());
+                String errorCode = json.optString("error_code", "");
+                if ("otp_expired".equals(errorCode) || "token_expired".equals(errorCode)) {
+                    return "OTP has expired. Please request a new one.";
+                }
+                if ("invalid_otp".equals(errorCode) || "bad_otp".equals(errorCode)) {
+                    return "Incorrect OTP. Please check and try again.";
+                }
+                String msg = json.optString("msg", "");
+                if (!msg.isEmpty()) return msg;
+            }
+        } catch (Exception ignored) {}
+        if (response.code() == 422) return "Incorrect OTP. Please check and try again.";
+        return "Verification failed. Please try again.";
     }
 
     private void clearOtpFields() {

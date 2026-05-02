@@ -58,11 +58,16 @@ public class InstructorCourseAdapter extends RecyclerView.Adapter<InstructorCour
             holder.tvStatus.setTextColor(context.getResources().getColor(android.R.color.darker_gray));
         }
 
-        if (course.getThumbnailResId() != 0) {
+        if (course.getThumbnailUrl() != null && !course.getThumbnailUrl().isEmpty()) {
+            com.bumptech.glide.Glide.with(context)
+                    .load(course.getThumbnailUrl())
+                    .placeholder(R.drawable.image_courses)
+                    .error(R.drawable.image_courses)
+                    .into(holder.ivCourseThumb);
+        } else if (course.getThumbnailResId() != 0) {
             holder.ivCourseThumb.setImageResource(course.getThumbnailResId());
         } else {
-            // placeholder
-            holder.ivCourseThumb.setImageResource(R.drawable.ic_home);
+            holder.ivCourseThumb.setImageResource(R.drawable.image_courses);
         }
 
         holder.itemView.setOnClickListener(v -> {

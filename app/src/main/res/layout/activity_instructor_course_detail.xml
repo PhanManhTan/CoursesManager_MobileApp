@@ -5,7 +5,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/bg_primary">
+    android:background="@color/bg_primary"
+    android:fitsSystemWindows="true">
 
     <LinearLayout
         android:id="@+id/header"
@@ -23,7 +24,7 @@
             android:id="@+id/btnBack"
             android:layout_width="24dp"
             android:layout_height="24dp"
-            android:src="@drawable/ic_home"
+            app:srcCompat="@drawable/outline_arrow_back_24"
             app:tint="@color/white" />
 
         <TextView

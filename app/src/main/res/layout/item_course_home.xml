@@ -88,7 +88,7 @@
             android:id="@+id/tvPrice"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="đ349.000"
+            android:text="$34.90"
             android:textColor="@color/text_primary"
             android:textSize="17sp"
             android:textStyle="bold" />
@@ -97,7 +97,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:text="đ399.000"
+            android:text="$39.90"
             android:textColor="@color/text_secondary"
             android:textSize="13sp" />
     </LinearLayout>

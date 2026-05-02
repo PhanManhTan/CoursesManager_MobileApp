@@ -8,8 +8,10 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import com.example.myapplication.R;
 
+import com.example.myapplication.data.remote.RetrofitClient;
 import com.example.myapplication.models.User;
 import com.example.myapplication.utils.MockData;
+import com.example.myapplication.utils.SessionManager;
 import java.util.List;
 
 public class AccountActivity extends AppCompatActivity {
@@ -53,6 +55,8 @@ public class AccountActivity extends AppCompatActivity {
         });
 
         findViewById(R.id.btnLogout).setOnClickListener(v -> {
+            new SessionManager(this).clear();
+            RetrofitClient.resetClient();
             Intent intent = new Intent(this, com.example.myapplication.activities.auth.LoginActivity.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
             startActivity(intent);

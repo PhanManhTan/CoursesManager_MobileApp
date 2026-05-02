@@ -57,17 +57,27 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.ViewHolder
         }
         holder.tvInstructor.setText(instructorName);
         
-        holder.tvPrice.setText("đ" + String.format("%,.0f", course.getPrice() * 1000));
+        holder.tvPrice.setText("$" + String.format("%.2f", course.getPrice()));
         
         if (course.getDiscountPrice() > 0) {
             holder.tvOriginalPrice.setVisibility(View.VISIBLE);
-            holder.tvOriginalPrice.setText("đ" + String.format("%,.0f", course.getPrice() * 1000));
+            holder.tvOriginalPrice.setText("$" + String.format("%.2f", course.getDiscountPrice()));
         } else {
             holder.tvOriginalPrice.setVisibility(View.GONE);
         }
 
         holder.tvRatingValue.setText("4.8");
         holder.tvReviewCount.setText("(24)");
+
+        if (course.getThumbnailUrl() != null && !course.getThumbnailUrl().isEmpty()) {
+            com.bumptech.glide.Glide.with(holder.itemView.getContext())
+                    .load(course.getThumbnailUrl())
+                    .placeholder(R.drawable.image_courses)
+                    .error(R.drawable.image_courses)
+                    .into(holder.ivThumb);
+        } else {
+            holder.ivThumb.setImageResource(R.drawable.image_courses);
+        }
     }
 
     @Override

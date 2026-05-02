@@ -22,7 +22,7 @@
                 android:id="@+id/tvLessonNumber"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Bài 1: ..."
+                android:text="Lesson 1: ..."
                 android:textColor="@color/white"
                 android:textSize="16sp"
                 android:textStyle="bold" />
@@ -173,7 +173,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="CÂU HỎI TRẮC NGHIỆM"
+            android:text="QUIZ QUESTIONS"
             android:textColor="@color/accent_light"
             android:textSize="12sp"
             android:textStyle="bold" />
@@ -190,7 +190,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:text="+ Thêm câu hỏi"
+            android:text="+ Add Question"
             android:textAllCaps="false"
             android:textColor="@color/white"
             app:icon="@android:drawable/ic_input_add"

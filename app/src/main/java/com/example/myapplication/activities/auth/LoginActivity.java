@@ -146,7 +146,8 @@ public class LoginActivity extends AppCompatActivity {
                 // 🔥 Check if BANNED
                 if ("banned".equalsIgnoreCase(status)) {
                     Toast.makeText(LoginActivity.this, "Your account is banned. Please contact support.", Toast.LENGTH_LONG).show();
-                    sessionManager.clear(); // Clear the temporary session
+                    sessionManager.clear();
+                    RetrofitClient.resetClient();
                     return;
                 }
 

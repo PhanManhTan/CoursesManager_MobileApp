@@ -9,7 +9,7 @@
 
     <LinearLayout
         android:id="@+id/headerBar"
-        android:layout_width="406dp"
+        android:layout_width="0dp"
         android:layout_height="62dp"
         android:gravity="center_vertical"
         android:orientation="horizontal"
@@ -64,7 +64,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="16dp"
-                android:text="Lập trình Android Java"
+                android:text="Android Programming"
                 android:textColor="@color/text_primary"
                 android:textSize="24sp"
                 android:textStyle="bold" />
@@ -81,7 +81,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="70.000đ"
+                    android:text="$70.00"
                     android:textColor="@color/accent_light"
                     android:textSize="26sp"
                     android:textStyle="bold" />
@@ -91,7 +91,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="100.000đ"
+                    android:text="$100.00"
                     android:textColor="@color/text_secondary"
                     android:textSize="16sp" />
 

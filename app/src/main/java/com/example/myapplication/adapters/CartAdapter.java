@@ -30,9 +30,12 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
 
         holder.tvTitle.setText(course.getTitle());
 
-        holder.tvInstructor.setText("Instructor ID: " + course.getInstructorId());
+        com.example.myapplication.models.User instructor =
+                com.example.myapplication.utils.MockData.getUserById(course.getInstructorId());
+        holder.tvInstructor.setText(instructor != null ? instructor.getFullName() : "Unknown Instructor");
 
-        holder.tvPrice.setText(String.format("$%.2f", course.getPrice()));
+        double price = course.getDiscountPrice() > 0 ? course.getDiscountPrice() : course.getPrice();
+        holder.tvPrice.setText(String.format("$%.2f", price));
     }
 
     @Override

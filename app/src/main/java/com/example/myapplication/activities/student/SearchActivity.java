@@ -53,7 +53,7 @@ public class SearchActivity extends AppCompatActivity {
                 if (inst != null) instructorName = inst.getFullName();
                 
                 if (instructor != null) instructor.setText(instructorName);
-                if (price != null) price.setText("đ" + String.format("%,.0f", course.getPrice() * 1000));
+                if (price != null) price.setText("$" + String.format("%.2f", course.getPrice()));
                 if (thumb != null) thumb.setImageResource(R.drawable.image_courses);
 
                 itemView.setOnClickListener(new View.OnClickListener() {

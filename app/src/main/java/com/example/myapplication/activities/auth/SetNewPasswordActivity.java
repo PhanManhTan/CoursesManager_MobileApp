@@ -15,6 +15,8 @@ import com.example.myapplication.data.remote.AuthApi;
 import com.example.myapplication.data.remote.RetrofitClient;
 import com.example.myapplication.utils.SessionManager;
 
+import org.json.JSONObject;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -92,12 +94,12 @@ public class SetNewPasswordActivity extends AppCompatActivity {
                 btnResetPassword.setText("Reset Password");
 
                 if (response.isSuccessful()) {
+                    sessionManager.clear();
+                    RetrofitClient.resetClient();
+
                     Toast.makeText(SetNewPasswordActivity.this,
                             "Password updated! Please login with your new password.",
                             Toast.LENGTH_LONG).show();
-
-                    // Xóa token cũ để bắt buộc đăng nhập lại
-                    sessionManager.clear();
 
                     Intent intent = new Intent(SetNewPasswordActivity.this, LoginActivity.class);
                     intent.putExtra(LoginActivity.EXTRA_EMAIL, userEmail);
@@ -105,9 +107,8 @@ public class SetNewPasswordActivity extends AppCompatActivity {
                     startActivity(intent);
                     finish();
                 } else {
-                    Toast.makeText(SetNewPasswordActivity.this,
-                            "Failed to update password. Session may have expired.",
-                            Toast.LENGTH_SHORT).show();
+                    String errorMsg = parseErrorMessage(response);
+                    Toast.makeText(SetNewPasswordActivity.this, errorMsg, Toast.LENGTH_LONG).show();
                 }
             }
 
@@ -120,5 +121,21 @@ public class SetNewPasswordActivity extends AppCompatActivity {
                         Toast.LENGTH_SHORT).show();
             }
         });
+    }
+
+    private String parseErrorMessage(Response<?> response) {
+        try {
+            if (response.errorBody() != null) {
+                JSONObject json = new JSONObject(response.errorBody().string());
+                String errorCode = json.optString("error_code", "");
+                if ("same_password".equals(errorCode)) {
+                    return "New password must be different from your current password.";
+                }
+                String msg = json.optString("msg", "");
+                if (!msg.isEmpty()) return msg;
+            }
+        } catch (Exception ignored) {}
+        if (response.code() == 401) return "Session expired. Please request a new password reset.";
+        return "Failed to update password. Please try again.";
     }
 }

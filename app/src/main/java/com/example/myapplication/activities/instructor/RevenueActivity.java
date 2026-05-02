@@ -1,5 +1,6 @@
 package com.example.myapplication.activities.instructor;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
@@ -13,12 +14,14 @@ import com.github.mikephil.charting.data.BarDataSet;
 import com.github.mikephil.charting.data.PieData;
 import com.github.mikephil.charting.data.PieDataSet;
 import com.github.mikephil.charting.utils.ColorTemplate;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class RevenueActivity extends AppCompatActivity {
 
     private RevenueViewModel viewModel;
     private BarChart barChart;
     private PieChart pieChart;
+    private BottomNavigationView bottomNav;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,11 +30,13 @@ public class RevenueActivity extends AppCompatActivity {
 
         barChart = findViewById(R.id.barChart);
         pieChart = findViewById(R.id.pieChart);
+        bottomNav = findViewById(R.id.bottomNav);
 
         viewModel = new ViewModelProvider(this).get(RevenueViewModel.class);
 
         setupCharts();
         observeData();
+        setupNavigation();
 
         findViewById(R.id.btnBack).setOnClickListener(v -> finish());
     }
@@ -72,5 +77,30 @@ public class RevenueActivity extends AppCompatActivity {
             pieChart.setData(data);
             pieChart.invalidate();
         });
+    }
+
+    private void setupNavigation() {
+        if (bottomNav != null) {
+            bottomNav.setSelectedItemId(R.id.nav_instructor_revenue);
+            bottomNav.setOnItemSelectedListener(item -> {
+                int itemId = item.getItemId();
+                if (itemId == R.id.nav_instructor_home) {
+                    startActivity(new Intent(this, InstructorDashboardActivity.class));
+                    finish();
+                    return true;
+                } else if (itemId == R.id.nav_instructor_students) {
+                    startActivity(new Intent(this, StudentListActivity.class));
+                    finish();
+                    return true;
+                } else if (itemId == R.id.nav_instructor_revenue) {
+                    return true;
+                } else if (itemId == R.id.nav_instructor_account) {
+                    startActivity(new Intent(this, com.example.myapplication.activities.common.AccountActivity.class));
+                    finish();
+                    return true;
+                }
+                return false;
+            });
+        }
     }
 }

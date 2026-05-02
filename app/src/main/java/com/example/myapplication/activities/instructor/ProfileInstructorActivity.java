@@ -1,11 +1,11 @@
 package com.example.myapplication.activities.instructor;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import com.bumptech.glide.Glide;
 import com.example.myapplication.R;
@@ -16,13 +16,15 @@ import com.example.myapplication.models.Course;
 import com.example.myapplication.models.Enrollment;
 import com.example.myapplication.models.User;
 import com.example.myapplication.utils.SessionManager;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+import java.util.ArrayList;
 import java.util.List;
 
 public class ProfileInstructorActivity extends AppCompatActivity {
 
     private LinearLayout lnInstructorCourses;
-    private ImageView btnBack;
     private TextView tvName, tvBio, tvExpertise, tvStudentsCount;
+    private BottomNavigationView bottomNav;
     private UserRepository userRepository;
     private CourseRepository courseRepository;
     private EnrollmentRepository enrollmentRepository;
@@ -38,47 +40,63 @@ public class ProfileInstructorActivity extends AppCompatActivity {
         tvExpertise = findViewById(R.id.tvExpertise);
         tvStudentsCount = findViewById(R.id.tvStudentsCount);
         lnInstructorCourses = findViewById(R.id.lnInstructorCourses);
-        btnBack = findViewById(R.id.btnBack);
+        ImageView btnBack = findViewById(R.id.btnBack);
+        bottomNav = findViewById(R.id.bottomNav);
 
         userRepository = new UserRepository(this);
         courseRepository = new CourseRepository(this);
         enrollmentRepository = new EnrollmentRepository(this);
         sessionManager = new SessionManager(this);
 
-        btnBack.setOnClickListener(v -> finish());
+        if (btnBack != null) {
+            btnBack.setOnClickListener(v -> finish());
+        }
 
-        loadInstructorProfile();
+        setupNavigation();
+        loadMockupProfile(); // Load mockup first
+        loadInstructorProfile(); // Then try live data
+    }
+
+    private void loadMockupProfile() {
+        tvName.setText("John Instructor");
+        tvBio.setText("Expert in Android Development with 10 years of experience. I love teaching and building robust mobile applications.");
+        tvExpertise.setText("Senior Android Developer");
+        tvStudentsCount.setText("1,240");
+        
+        List<Course> mockupCourses = new ArrayList<>();
+        // Sửa lỗi: Truyền ID drawable (int) thay vì chuỗi rỗng ""
+        mockupCourses.add(new Course("1", "Advanced Android Development", 20, "15h", 99.99, "published", R.drawable.image_courses));
+        mockupCourses.add(new Course("2", "Kotlin Fundamentals", 12, "8h", 49.99, "published", R.drawable.image_courses));
+        displayCourses(mockupCourses);
     }
 
     private void loadInstructorProfile() {
         String instructorId = sessionManager.getUserId();
         if (instructorId == null) return;
 
-        // Fetch User Info
         userRepository.getById(instructorId, new UserRepository.RepositoryCallback<User>() {
             @Override
             public void onSuccess(User user) {
                 if (user != null) {
                     tvName.setText(user.getFullName());
-                    tvBio.setText(user.getBio() != null ? user.getBio() : "No bio available.");
-                    tvExpertise.setText(user.getRole());
+                    if (user.getBio() != null && !user.getBio().isEmpty()) {
+                        tvBio.setText(user.getBio());
+                    }
+                    tvExpertise.setText(user.getRole() != null ? user.getRole() : "Instructor");
                 }
             }
             @Override public void onError(String message) {}
         });
 
-        // Fetch Courses
         courseRepository.getByInstructor(instructorId, new CourseRepository.RepositoryCallback<List<Course>>() {
             @Override
             public void onSuccess(List<Course> courses) {
-                if (courses != null) {
+                if (courses != null && !courses.isEmpty()) {
                     displayCourses(courses);
                     calculateTotalStudents(courses);
                 }
             }
-            @Override public void onError(String message) {
-                Toast.makeText(ProfileInstructorActivity.this, "Error loading courses", Toast.LENGTH_SHORT).show();
-            }
+            @Override public void onError(String message) {}
         });
     }
 
@@ -96,11 +114,9 @@ public class ProfileInstructorActivity extends AppCompatActivity {
                         }
                     }
                 }
-                tvStudentsCount.setText(String.valueOf(total));
+                if (total > 0) tvStudentsCount.setText(String.valueOf(total));
             }
-            @Override public void onError(String message) {
-                tvStudentsCount.setText("0");
-            }
+            @Override public void onError(String message) {}
         });
     }
 
@@ -114,22 +130,52 @@ public class ProfileInstructorActivity extends AppCompatActivity {
             TextView price = itemView.findViewById(R.id.tvPrice);
             ImageView thumb = itemView.findViewById(R.id.ivCourseThumb);
 
-            title.setText(course.getTitle());
-            instructor.setText(tvName.getText());
-            price.setText("$" + course.getPrice());
+            if (title != null) title.setText(course.getTitle());
+            if (instructor != null) instructor.setText(tvName.getText());
+            if (price != null) price.setText("$" + course.getPrice());
 
-            // Use Glide for live thumbnails
-            if (course.getThumbnailUrl() != null && !course.getThumbnailUrl().isEmpty()) {
-                Glide.with(this)
-                        .load(course.getThumbnailUrl())
-                        .placeholder(R.drawable.image_courses)
-                        .error(R.drawable.image_courses)
-                        .into(thumb);
-            } else {
-                thumb.setImageResource(R.drawable.image_courses);
+            if (thumb != null) {
+                if (course.getThumbnailUrl() != null && !course.getThumbnailUrl().isEmpty()) {
+                    Glide.with(this)
+                            .load(course.getThumbnailUrl())
+                            .placeholder(R.drawable.image_courses)
+                            .error(R.drawable.image_courses)
+                            .into(thumb);
+                } else if (course.getThumbnailResId() != 0) {
+                    thumb.setImageResource(course.getThumbnailResId());
+                } else {
+                    thumb.setImageResource(R.drawable.image_courses);
+                }
             }
 
             lnInstructorCourses.addView(itemView);
+        }
+    }
+
+    private void setupNavigation() {
+        if (bottomNav != null) {
+            bottomNav.setSelectedItemId(R.id.nav_instructor_account);
+            bottomNav.setOnItemSelectedListener(item -> {
+                int itemId = item.getItemId();
+                if (itemId == R.id.nav_instructor_home) {
+                    startActivity(new Intent(this, InstructorDashboardActivity.class));
+                    finish();
+                    return true;
+                } else if (itemId == R.id.nav_instructor_students) {
+                    startActivity(new Intent(this, StudentListActivity.class));
+                    finish();
+                    return true;
+                } else if (itemId == R.id.nav_instructor_revenue) {
+                    startActivity(new Intent(this, RevenueActivity.class));
+                    finish();
+                    return true;
+                } else if (itemId == R.id.nav_instructor_account) {
+                    startActivity(new Intent(this, com.example.myapplication.activities.common.AccountActivity.class));
+                    finish();
+                    return true;
+                }
+                return false;
+            });
         }
     }
 }

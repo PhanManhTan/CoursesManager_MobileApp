@@ -33,7 +33,24 @@ public class RevenueViewModel extends AndroidViewModel {
         SessionManager sessionManager = new SessionManager(application);
         this.instructorId = sessionManager.getUserId();
         
+        loadMockupData();
         fetchRevenueData();
+    }
+
+    private void loadMockupData() {
+        List<BarEntry> barData = new ArrayList<>();
+        barData.add(new BarEntry(1, 450f));
+        barData.add(new BarEntry(2, 600f));
+        barData.add(new BarEntry(3, 300f));
+        barData.add(new BarEntry(4, 900f));
+        barData.add(new BarEntry(5, 1240f));
+        barEntries.setValue(barData);
+
+        List<PieEntry> pieData = new ArrayList<>();
+        pieData.add(new PieEntry(400f, "Android Pro"));
+        pieData.add(new PieEntry(300f, "UI/UX Design"));
+        pieData.add(new PieEntry(540f, "NodeJS Basic"));
+        pieEntries.setValue(pieData);
     }
 
     public void fetchRevenueData() {
@@ -42,7 +59,9 @@ public class RevenueViewModel extends AndroidViewModel {
         courseRepository.getByInstructor(instructorId, new CourseRepository.RepositoryCallback<List<Course>>() {
             @Override
             public void onSuccess(List<Course> instructorCourses) {
-                aggregateEnrollmentData(instructorCourses);
+                if (instructorCourses != null && !instructorCourses.isEmpty()) {
+                    aggregateEnrollmentData(instructorCourses);
+                }
             }
             @Override public void onError(String message) {}
         });
@@ -54,6 +73,7 @@ public class RevenueViewModel extends AndroidViewModel {
             public void onSuccess(List<Enrollment> allEnrollments) {
                 Map<String, Float> courseRevenueMap = new HashMap<>();
                 Map<Integer, Float> monthlyRevenueMap = new HashMap<>();
+                boolean hasData = false;
                 
                 if (courses != null && allEnrollments != null) {
                     for (Course course : courses) {
@@ -61,7 +81,7 @@ public class RevenueViewModel extends AndroidViewModel {
                         for (Enrollment enrollment : allEnrollments) {
                             if (enrollment.getCourseId() != null && enrollment.getCourseId().equals(course.getId())) {
                                 courseTotal += enrollment.getPaidAmount();
-                                
+                                hasData = true;
                                 try {
                                     if (enrollment.getCreatedAt() != null && enrollment.getCreatedAt().length() >= 7) {
                                         int month = Integer.parseInt(enrollment.getCreatedAt().substring(5, 7));
@@ -76,17 +96,19 @@ public class RevenueViewModel extends AndroidViewModel {
                     }
                 }
 
-                List<BarEntry> barData = new ArrayList<>();
-                for (int i = 1; i <= 12; i++) {
-                    barData.add(new BarEntry(i, monthlyRevenueMap.getOrDefault(i, 0f)));
-                }
-                barEntries.setValue(barData);
+                if (hasData) {
+                    List<BarEntry> barData = new ArrayList<>();
+                    for (int i = 1; i <= 12; i++) {
+                        barData.add(new BarEntry(i, monthlyRevenueMap.getOrDefault(i, 0f)));
+                    }
+                    barEntries.setValue(barData);
 
-                List<PieEntry> pieData = new ArrayList<>();
-                for (Map.Entry<String, Float> entry : courseRevenueMap.entrySet()) {
-                    pieData.add(new PieEntry(entry.getValue(), entry.getKey()));
+                    List<PieEntry> pieData = new ArrayList<>();
+                    for (Map.Entry<String, Float> entry : courseRevenueMap.entrySet()) {
+                        pieData.add(new PieEntry(entry.getValue(), entry.getKey()));
+                    }
+                    pieEntries.setValue(pieData);
                 }
-                pieEntries.setValue(pieData);
             }
             @Override public void onError(String message) {}
         });

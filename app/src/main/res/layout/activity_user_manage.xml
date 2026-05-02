@@ -23,7 +23,7 @@
             android:id="@+id/btnBack"
             android:layout_width="24dp"
             android:layout_height="24dp"
-            android:src="@drawable/ic_home"
+            app:srcCompat="@drawable/outline_arrow_back_24"
             app:tint="@color/white" />
 
         <TextView
